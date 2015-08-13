@@ -1,5 +1,5 @@
 __author__ = 'cyberbeast'
-import os
+import os as os
 from Bio import SeqIO, Seq
 from multiprocessing import Pool, Process, Manager
 from py2neo import neo4j, Node, Relationship, watch, authenticate, Graph
@@ -7,7 +7,9 @@ import glob
 
 
 def clean(file_name):
+    print("reaching")
     seqcount = SeqIO.convert(file_name, "fasta", file_name + str("_FORMATTED"), "fasta")
+    print("cleaning" + str(file_name))
     return [file_name, seqcount]
 
 
@@ -15,7 +17,7 @@ def CreateDataFileNode_callback(files):
     file_name, file_sequence_count = files
     tx = graph.cypher.begin()
     c_pre = 'MATCH (n:DataFile) WHERE n.ID = {name} RETURN n.SequenceCount'
-    tx.append(c_pre, {'name':file_name})
+    tx.append(c_pre, {'name': file_name})
     results = tx.commit()
 
     if results == file_sequence_count:
@@ -42,13 +44,14 @@ if __name__ == "__main__":
 
     filelist = []
     # use glob module
-    for name in glob.glob('Genome Dataset/Chromosomes/hs_ref_GRCh38?.fa'):
+    for name in glob.glob(str(os.getcwd()) + '/GenomeDataset/Chromosomes/*.fa'):
         filelist.append(name)
 
+    # print(filelist)
     pool = Pool()
-    pool.apply_async(clean, (filelist,), CreateDataFileNode_callback)
+    for file_l in filelist:
+        print(file_l)
+        pool.apply_async(clean, (file_l,), callback=CreateDataFileNode_callback)
+
     pool.close()
     pool.join()
-
-
-
