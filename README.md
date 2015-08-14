@@ -18,6 +18,8 @@ These drawbacks include:
 
 *See the section on Description of Drawbacks of GSAF 1.0 for a more verbose explanation of the drawbacks.*
 
+The primary objective of the latest framework has been to address all these drawbacks and to implement new features. Description of these improvements and features will be added soon as a separate section.
+
 ### Description of Drawbacks of GSAF 1.0 ###
 * #### High data processing and analysis time ####
 >Using the approach that was previously devised for a graph based analysis of gene data required a substantial amount of time for execution. The longest I remember running the program when developing the framework was 4 days before the process (sadly, and unfortunately) revealed an error towards the end.
@@ -36,26 +38,6 @@ These drawbacks include:
 
 * #### High error reporting time for Framework Testing ####
 >As mentioned earlier, since the client application had to wait till the entire file is processed and analyzed over the cluster of worker nodes dedicated to this task, when testing different aspects of the code for the framework, a quantitatively large amount of time was required for errors to be reported back to the client (even if the errors were generated at the beginning of the code)
-
-
-* Quick summary
-* Version
-
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
 
 ### Contributers ###
 
