@@ -1,13 +1,13 @@
-**# Gene Sequence Analysis Framework 2.0**
+# Gene Sequence Analysis Framework 2.0 #
 
 This is the official repository for the GSAF Project. The first version of the framework was a demonstrative prototype. However, it had its own inherent drawbacks that hindered it's efficacy as an effective application framework. These drawbacks include:
-**
-* High data processing and analysis time.
-* Ability to process only manually crafted data.
-* Client side data chunking and distribution.
-* Manual update of Worker Node Task definitions
-* Heavy File I/O operations.
-* High error reporting time for Framework Testing.**
+
+* **High data processing and analysis time.**
+* **Ability to process only manually crafted data.**
+* **Client side data chunking and distribution.**
+* **Manual update of Worker Node Task definitions**
+* **Heavy File I/O operations.**
+* **High error reporting time for Framework Testing.**
 
 ### Description of Drawbacks of GSAF 1.0 ###
 * #### High data processing and analysis time ####
