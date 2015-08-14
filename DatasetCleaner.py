@@ -1,47 +1,44 @@
 __author__ = 'cyberbeast'
 import os as os
-from Bio import SeqIO, Seq
-from multiprocessing import Pool, Process, Manager
-from py2neo import neo4j, Node, Relationship, watch, authenticate, Graph
+from Bio import SeqIO
+from multiprocessing import Pool
 import glob
 
 
-def clean(file_name):
-    print("reaching")
-    seqcount = SeqIO.convert(file_name, "fasta", file_name + str("_FORMATTED"), "fasta")
-    print("cleaning" + str(file_name))
-    return [file_name, seqcount]
+def clean(fasta_file, min_length=0, rec_n=100):
+    # TODO Code to check if file is already clean or not!
+    # ---------------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------------
 
+    # create our hash table to add the sequences
+    sequences = {}
 
-def CreateDataFileNode_callback(files):
-    file_name, file_sequence_count = files
-    tx = graph.cypher.begin()
-    c_pre = 'MATCH (n:DataFile) WHERE n.ID = {name} RETURN n.SequenceCount'
-    tx.append(c_pre, {'name': file_name})
-    results = tx.commit()
+    # Using the biopython fasta parse we can read our fasta input
+    for seq_record in SeqIO.parse(fasta_file, "fasta"):
+        # Take the current sequence
+        sequence = str(seq_record.seq).upper()
+        # Check if the current sequence is according to the user parameters
+        if len(sequence) >= min_length and (float(sequence.count("N")) / float(len(sequence))) * 100 <= rec_n:
+            # If the sequence passed in the test "is It clean?" and It isnt in the hash table , the sequence and Its id are going to be in the hash
+            if sequence not in sequences:
+                sequences[sequence] = seq_record.id
+                # If It is already in the hash table, We're just gonna concatenate the ID of the current sequence to another one that is already in the hash table
+            else:
+                sequences[sequence] += "_" + seq_record.id
 
-    if results == file_sequence_count:
-        print("Sequence Counts are the same. No changes made in the database for: " + str(file_name))
-    else:
-        if results[0] is None:
-            ty = graph.cypher.begin()
-            statement = "MERGE (:DataFile {ID:{NAME}, SequenceCount: {SEQCOUNT}})"
-            ty.append(statement, {"NAME": file_name, "SEQCOUNT": file_sequence_count})
-            ty.commit()
-        else:
-            tz = graph.cypher.begin()
-            statement = "MATCH (a:DataFile) WHERE a.ID = {name} SET a.SequenceCount: {SEQCOUNT}"
-            tz.append(statement, {"name": file_name, "SEQCOUNT": file_sequence_count})
-            tz.commit()
+    # Write the clean sequences
+
+    # Create a file in the same directory where you ran this script
+    output_file = open("clear_" + fasta_file, "w+")
+    # Just Read the Hash Table and write on the file as a fasta format
+    for sequence in sequences:
+        output_file.write(">" + sequences[sequence] + "\n" + sequence + "\n")
+    output_file.close()
+
+    print("CLEAN!!!\nPlease check clear_" + fasta_file)
 
 
 if __name__ == "__main__":
-    watch("httpstream")
-    SEQCOUNT = 0
-
-    authenticate("192.168.6.74:7474", "neo4j", "trvlr")
-    graph = neo4j.Graph("http://192.168.6.74:7474/db/data/")
-
     filelist = []
     # use glob module
     for name in glob.glob(str(os.getcwd()) + '/GenomeDataset/Chromosomes/*.fa'):
@@ -51,7 +48,7 @@ if __name__ == "__main__":
     pool = Pool()
     for file_l in filelist:
         print(file_l)
-        pool.apply_async(clean, (file_l,), callback=CreateDataFileNode_callback)
+        pool.apply_async(clean, (file_l,))
 
     pool.close()
     pool.join()
