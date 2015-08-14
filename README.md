@@ -40,7 +40,7 @@ These drawbacks include:
 
 * Quick summary
 * Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+
 
 ### How do I get set up? ###
 
@@ -57,7 +57,7 @@ These drawbacks include:
 * Code review
 * Other guidelines
 
-### Who do I talk to? ###
+### Contributers ###
 
-* Repo owner or admin
-* Other community or team contact
+* [Sandesh Sanjay Gade](fb.com/cyberbeast) - Developer
+* [Dr. Snehanshu Saha](pesitsouth.pes.edu/faculty/snehanshu-saha) - Mentor
