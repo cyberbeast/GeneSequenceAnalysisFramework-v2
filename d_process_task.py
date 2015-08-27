@@ -27,7 +27,7 @@ def process(filename):
 		sequence_record.join(record)
 
 	atree = ATree()
-	print(str(len(sequence_record)) + "-->" + atree)
+	print(str(len(sequence_record)) + "-->" + str(atree))
 
 	for subsequence_chunks in break_sequence(sequence_record, 4):
 		atree.process_subsequence(subsequence_chunks)
