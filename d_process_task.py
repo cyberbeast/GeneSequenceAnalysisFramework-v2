@@ -23,7 +23,7 @@ def process(filename):
 	sequence_record = ""
 
 	print(os.getcwd())
-	for record in SeqIO.parse("/" + filename, "fasta"):
+	for record in SeqIO.parse(filename, "fasta"):
 		sequence_record.join(record)
 
 	atree = ATree.ATree()
