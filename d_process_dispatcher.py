@@ -7,21 +7,19 @@ import logging
 
 
 def manage_process_task():
-	flist = []
+	async_result = []
 	for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
-		flist.append = name
+		async_result.append(app.send_task("d_process_task.process", args=(name,)))
 
-	result = app.send_task("d_process_task.process", args=(name,))
-	logging.info(result.get())
+	total = 0
+
+	for key in async_result:
+		if key.ready():
+			total += key.get()
+
+	print(total)
 
 if __name__ == '__main__':
 	app = Celery('d_process_task', broker='redis://192.168.6.4:6379/0', backend='redis://192.168.6.4:6379/0')
 
 	manage_process_task()
-	# async_result = []
-
-	# print(glob.glob(str(os.getcwd() + '/GenomeDataset/Chromosomes/*.fa')))
-
-	# for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
-	# 	# print("DoingThis")
-	# 	async_result.append(app.send_task(`"d_process_task.process", args=(name,)))
