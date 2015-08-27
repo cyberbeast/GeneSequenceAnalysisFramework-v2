@@ -21,6 +21,8 @@ app = Celery('tasks', broker='redis://192.168.6.4:6379/0', backend='redis://192.
 def process(filename):
 	print(filename)
 	sequence_record = ""
+
+	print(os.getcwd())
 	for record in SeqIO.parse("/" + filename, "fasta"):
 		sequence_record.join(record)
 
