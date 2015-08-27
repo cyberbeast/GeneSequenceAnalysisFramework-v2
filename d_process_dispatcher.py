@@ -5,21 +5,23 @@ import glob
 import logging
 # import os
 
+
+def manage_process_task():
+	flist = []
+	for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
+		flist.append = name
+
+	result = app.send_task("d_process_task.process", args=(name,))
+	logging.info(result.get())
+
 if __name__ == '__main__':
 	app = Celery('d_process_task', broker='redis://192.168.6.4:6379/0', backend='redis://192.168.6.4:6379/0')
 
-	async_result = []
+	manage_process_task()
+	# async_result = []
 
 	# print(glob.glob(str(os.getcwd() + '/GenomeDataset/Chromosomes/*.fa')))
 
 	# for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
 	# 	# print("DoingThis")
 	# 	async_result.append(app.send_task("d_process_task.process", args=(name,)))
-
-	result_dict = {name: app.send_task("d_process_task.process", args=(name,)) for name in glob.glob('GenomeDataset/Chromosomes/*.fa')}
-
-	for key, value in result_dict.items():
-		if value.ready():
-			logging.info(key + " --> " + value.get()[1])
-		else:
-			logging.info("waiting")
