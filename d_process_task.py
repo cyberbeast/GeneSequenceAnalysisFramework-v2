@@ -37,3 +37,5 @@ def process(filename):
 	return len(sequence_record)
 
 	# atree.pickle_into_file(str(os.getcwd()) + 'GenomeDataset/Processing/' + filename + "_PICKLE")
+
+# THATS IT

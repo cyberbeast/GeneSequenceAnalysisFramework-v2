@@ -23,3 +23,5 @@ if __name__ == '__main__':
 	app = Celery('d_process_task', broker='redis://192.168.6.4:6379/0', backend='redis://192.168.6.4:6379/0')
 
 	manage_process_task()
+
+# Thats it
