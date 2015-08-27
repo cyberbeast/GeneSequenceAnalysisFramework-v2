@@ -15,4 +15,4 @@ if __name__ == '__main__':
 		# print("DoingThis")
 		async_result.append(app.send_task("d_process_task.process", args=(name,)))
 
-	print(res.get() for res in async_result)
+	print(str(res.get() for res in async_result))
