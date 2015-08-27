@@ -11,8 +11,14 @@ if __name__ == '__main__':
 
 	# print(glob.glob(str(os.getcwd() + '/GenomeDataset/Chromosomes/*.fa')))
 
-	for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
-		# print("DoingThis")
-		async_result.append(app.send_task("d_process_task.process", args=(name,)))
+	# for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
+	# 	# print("DoingThis")
+	# 	async_result.append(app.send_task("d_process_task.process", args=(name,)))
 
-	print(str(res.get() for res in async_result))
+	result_dict = {name: app.send_task("d_process_task.process", args=(name,)) for name in glob.glob('GenomeDataset/Chromosomes/*.fa')}
+
+	for key, value in result_dict.items():
+		if value.ready():
+			print(key + " --> " + value.get()[1])
+		else:
+			print("waiting")
