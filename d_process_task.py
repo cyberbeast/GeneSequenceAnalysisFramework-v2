@@ -34,5 +34,5 @@ def process(filename):
 		atree.process_subsequence(subsequence_chunks)
 
 	atree.dump_to_file(filename + "_TREE")
-	return filename + "--> done"
+	return len(sequence_record)
 	# atree.pickle_into_file(str(os.getcwd()) + 'GenomeDataset/Processing/' + filename + "_PICKLE")

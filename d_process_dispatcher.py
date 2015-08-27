@@ -24,4 +24,4 @@ if __name__ == '__main__':
 
 	# for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
 	# 	# print("DoingThis")
-	# 	async_result.append(app.send_task("d_process_task.process", args=(name,)))
+	# 	async_result.append(app.send_task(`"d_process_task.process", args=(name,)))
