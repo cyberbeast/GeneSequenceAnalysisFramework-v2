@@ -2,7 +2,7 @@ __author__ = 'Sandesh'
 
 from celery import Celery
 from CustomClasses.ATree import *
-from Bio import SeqIO
+from Bio import SeqIO, Seq
 import os
 
 
@@ -20,11 +20,11 @@ app = Celery('tasks', broker='redis://192.168.6.4:6379/0', backend='redis://192.
 @app.task
 def process(filename):
 	print(filename)
-	sequence_record = ""
+	sequence_record = []
 
 	# print(os.getcwd())
 	for record in SeqIO.parse(filename, "fasta"):
-		sequence_record.join(record.seq)
+		sequence_record.append(record.seq)
 
 	atree = ATree()
 	print(str(len(sequence_record)) + "-->" + str(atree))
