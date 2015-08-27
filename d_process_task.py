@@ -26,7 +26,7 @@ def process(filename):
 	for record in SeqIO.parse(filename, "fasta"):
 		sequence_record_list.append(record.seq)
 
-	sequence_record = ''.join(sequence_record_list)
+	sequence_record = ''.join(str(e) for e in sequence_record_list)
 	atree = ATree()
 	print(str(len(sequence_record)) + "-->" + str(atree))
 
