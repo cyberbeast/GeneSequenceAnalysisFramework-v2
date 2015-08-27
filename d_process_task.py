@@ -1,7 +1,7 @@
 __author__ = 'Sandesh'
 
 from celery import Celery
-from CustomClasses import ATree
+from CustomClasses.ATree import *
 from Bio import SeqIO
 import os
 
@@ -26,7 +26,7 @@ def process(filename):
 	for record in SeqIO.parse(filename, "fasta"):
 		sequence_record.join(record)
 
-	atree = ATree.ATree()
+	atree = ATree()
 	print(atree)
 
 	for subsequence_chunks in break_sequence(sequence_record, 4):
