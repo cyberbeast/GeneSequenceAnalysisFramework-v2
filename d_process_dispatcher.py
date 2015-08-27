@@ -9,7 +9,6 @@ if __name__ == '__main__':
 	app = Celery('d_process_task', broker='redis://192.168.6.4:6379/0', backend='redis://192.168.6.4:6379/0')
 
 	async_result = []
-	logger = logging
 
 	# print(glob.glob(str(os.getcwd() + '/GenomeDataset/Chromosomes/*.fa')))
 
@@ -21,6 +20,6 @@ if __name__ == '__main__':
 
 	for key, value in result_dict.items():
 		if value.ready():
-			logger.info(key + " --> " + value.get()[1])
+			logging.info(key + " --> " + value.get()[1])
 		else:
-			logger.info("waiting")
+			logging.info("waiting")
