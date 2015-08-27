@@ -22,12 +22,12 @@ def process(filename):
 	print(filename)
 	sequence_record = ""
 
-	print(os.getcwd())
+	# print(os.getcwd())
 	for record in SeqIO.parse(filename, "fasta"):
 		sequence_record.join(record)
 
 	atree = ATree()
-	print(atree)
+	print(str(len(sequence_record)) + "-->" + atree)
 
 	for subsequence_chunks in break_sequence(sequence_record, 4):
 		atree.process_subsequence(subsequence_chunks)
