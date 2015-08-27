@@ -20,12 +20,13 @@ app = Celery('tasks', broker='redis://192.168.6.4:6379/0', backend='redis://192.
 @app.task
 def process(filename):
 	print(filename)
-	sequence_record = []
+	sequence_record_list = []
 
 	# print(os.getcwd())
 	for record in SeqIO.parse(filename, "fasta"):
-		sequence_record.append(record.seq)
+		sequence_record_list.append(record.seq)
 
+	sequence_record = ''.join(sequence_record_list)
 	atree = ATree()
 	print(str(len(sequence_record)) + "-->" + str(atree))
 
