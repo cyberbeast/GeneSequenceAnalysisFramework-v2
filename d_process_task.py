@@ -1,3 +1,4 @@
+# Distributed Processing Module Worker Task
 __author__ = 'Sandesh'
 
 from celery import Celery
@@ -35,7 +36,3 @@ def process(filename):
 
 	atree.dump_to_file(filename + "_TREE")
 	return len(sequence_record)
-
-	# atree.pickle_into_file(str(os.getcwd()) + 'GenomeDataset/Processing/' + filename + "_PICKLE")
-
-# THATS IT

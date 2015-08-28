@@ -1,3 +1,4 @@
+# Distributed Processing Module
 _author__ = 'Sandesh'
 
 from celery import Celery
@@ -24,4 +25,3 @@ if __name__ == '__main__':
 
 	manage_process_task()
 
-# Thats it
