@@ -42,7 +42,7 @@ def process(filename):
 
 @app.task
 def unique_pattern_generation(depth):
-	print("I am doing - " + depth)
+	print("I am doing - " + str(depth))
 	temp_result = []
 
 	if depth == 1:
