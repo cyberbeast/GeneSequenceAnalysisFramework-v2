@@ -44,7 +44,7 @@ def process(filename):
 def unique_pattern_generation(depth):
 	print("I am doing - " + str(depth))
 
-	if depth == 1:
+	if depth == 0:
 		val = depth
 	else:
 		val = 2 * depth
