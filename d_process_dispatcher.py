@@ -22,7 +22,7 @@ def manage_process_task():
 
 def manage_unique_pattern_generation_task(depth):
 	unique_patterns = []
-	upg_async_result = [app.send_task("d_process_task.unique_pattern_generation", args=(range(1, (2 * depth)),))]
+	upg_async_result = [app.send_task("d_process_task.unique_pattern_generation", args=([range(1, (2 * depth))],))]
 
 	for key in upg_async_result:
 		if key.ready():
