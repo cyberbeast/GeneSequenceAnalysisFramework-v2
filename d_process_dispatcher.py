@@ -22,7 +22,7 @@ def manage_process_task():
 
 def manage_unique_pattern_generation_task(depth):
 	unique_patterns = []
-	upg_async_result = [app.send_task("d_process_task.process", args=(range(1, (2 * depth)),))]
+	upg_async_result = [app.send_task("d_process_task.unique_pattern_generation", args=(range(1, (2 * depth)),))]
 
 	for key in upg_async_result:
 		if key.ready():
@@ -34,5 +34,5 @@ def manage_unique_pattern_generation_task(depth):
 if __name__ == '__main__':
 	app = Celery('d_process_task', broker='redis://192.168.6.4:6379/0', backend='redis://192.168.6.4:6379/0')
 
-	manage_unique_pattern_generation_task()
+	manage_unique_pattern_generation_task(4)
 	# manage_process_task()
