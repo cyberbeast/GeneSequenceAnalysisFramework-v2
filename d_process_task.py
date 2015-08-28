@@ -50,4 +50,4 @@ def unique_pattern_generation(depth):
 	else:
 		val = 2 * depth
 
-	return product(*['ACGT'] * (val))
+	return [product(*['ACGT'] * val)]
