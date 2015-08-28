@@ -25,7 +25,7 @@ def manage_unique_pattern_generation_task(depth):
 
 	range_val = 2 * depth
 
-	for length in range(range_val):
+	for length in range(1, range_val):
 		upg_async_result = [app.send_task("d_process_task.unique_pattern_generation", args=(length,))]
 
 	for key in upg_async_result:
