@@ -7,17 +7,29 @@ from itertools import product
 
 
 def manage_process_task():
+	# UNCOMMENT FOR STABLE WORKING CODE>>>
+	# async_result = []
+	# for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
+	# 	async_result.append(app.send_task("d_process_task.process", args=(name,)))
+	#
+	# total = 0
+	#
+	# for key in async_result:
+	# 	if key.ready():
+	# 		total += key.get()
+	#
+	# print(total)
+
 	async_result = []
-	for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
+	filelist = ["form.fa"]
+
+	for name in filelist:
 		async_result.append(app.send_task("d_process_task.process", args=(name,)))
 
 	total = 0
-
 	for key in async_result:
 		if key.ready():
-			total += key.get()
-
-	print(total)
+			total += key.get[1]()
 
 
 def manage_unique_pattern_generation_task(depth):
@@ -33,6 +45,13 @@ def manage_unique_pattern_generation_task(depth):
 			unique_patterns.append(key.get())
 
 	print(unique_patterns)
+#
+# def manage_count_task():
+
+
+# def manage_countmap_task():
+# 	manage_count_task()
+# 	manage_map_task()
 
 
 if __name__ == '__main__':
@@ -40,3 +59,4 @@ if __name__ == '__main__':
 
 	manage_unique_pattern_generation_task(4)
 	# manage_process_task()
+

@@ -37,7 +37,7 @@ def process(filename):
 		atree.process_subsequence(subsequence_chunks)
 
 	atree.dump_to_file(filename + "_TREE")
-	return len(sequence_record)
+	return [len(sequence_record), filename + "_TREE"]
 
 
 @app.task
