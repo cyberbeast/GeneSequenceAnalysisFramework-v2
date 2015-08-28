@@ -50,7 +50,4 @@ def unique_pattern_generation(depth):
 	else:
 		val = 2 * depth
 
-	for word in product(*['ACGT'] * (val)):
-		temp_result.append(word)
-
-	return temp_result
+	return product(*['ACGT'] * (val))
