@@ -5,7 +5,6 @@ from multiprocessing import Pool
 from py2neo import neo4j, Node, Relationship, watch, authenticate, Graph
 
 
-
 def logic_patterncounting(inp1):
     count = 0
     tx = graph.cypher.begin()

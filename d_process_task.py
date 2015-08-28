@@ -5,6 +5,7 @@ from celery import Celery
 from CustomClasses.ATree import *
 from Bio import SeqIO, Seq
 import os
+from itertools import product
 
 
 def break_sequence(sequence, depth):
@@ -14,6 +15,7 @@ def break_sequence(sequence, depth):
 			yield sequence[i:i + depth]
 		else:
 			yield sequence[i:]
+
 
 app = Celery('tasks', broker='redis://192.168.6.4:6379/0', backend='redis://192.168.6.4:6379/0')
 
@@ -36,3 +38,18 @@ def process(filename):
 
 	atree.dump_to_file(filename + "_TREE")
 	return len(sequence_record)
+
+
+@app.task
+def unique_pattern_generation(depth):
+	temp_result = []
+
+	if depth == 1:
+		val = depth
+	else:
+		val = 2 * depth
+
+	for word in product(*['ACGT'] * (val)):
+		temp_result.append(word)
+
+	return temp_result
