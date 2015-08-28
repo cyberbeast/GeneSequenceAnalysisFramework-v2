@@ -43,11 +43,11 @@ def process(filename):
 @app.task
 def unique_pattern_generation(depth):
 	print("I am doing - " + str(depth))
-	temp_result = []
 
 	if depth == 1:
 		val = depth
 	else:
 		val = 2 * depth
 
-	return [product(*['ACGT'] * val)]
+	temp_result = [''.join(x) for x in (product(*['ACGT'] * val))]
+	return temp_result
