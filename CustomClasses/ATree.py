@@ -91,7 +91,7 @@ class ATree:
 			json.dump(self.to_dictionary(), outfile)
 
 	def pickle_into_file(self, filename):
-		with open(filename, 'w') as picklefile:
+		with open(filename, 'wb') as picklefile:
 			if not self.values_computed:
 				self.compute_values()
 			pickle.dump(self, picklefile)
