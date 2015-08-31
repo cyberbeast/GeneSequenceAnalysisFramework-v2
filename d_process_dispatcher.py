@@ -8,28 +8,16 @@ from itertools import product
 
 def manage_process_task():
 	# UNCOMMENT FOR STABLE WORKING CODE>>>
-	# async_result = []
-	# for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
-	# 	async_result.append(app.send_task("d_process_task.process", args=(name,)))
-	#
-	# total = 0
-	#
-	# for key in async_result:
-	# 	if key.ready():
-	# 		total += key.get()
-	#
-	# print(total)
-
 	async_result = []
-	filelist = ['form.fa']
-
-	for name in filelist:
+	for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
 		async_result.append(app.send_task("d_process_task.process", args=(name,)))
 
 	total = 0
+
 	for key in async_result:
-		if key.ready:
-			total, name = key.get()
+		if key.ready():
+			total += key.get()
+
 	print(total)
 
 

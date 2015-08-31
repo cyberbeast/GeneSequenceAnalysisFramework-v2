@@ -53,6 +53,13 @@ class ATree:
 		else:
 			return 1 + sum([self.children[key].nodeCount() for key in self.children.keys()])
 
+	@staticmethod
+	def load_tree(filename):
+		with open(filename, 'r') as infile:
+			tree_dictionary = json.load(infile)
+
+		return tree_dictionary
+
 	def to_dictionary(self):
 		"""Return a dictionary representation of the tree"""
 		_dict = {}
