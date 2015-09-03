@@ -43,7 +43,7 @@ def process(filename):
 
     atree.pickle_into_file("GenomeDataset/Processing/" + os.path.basename(filename) + "_pTREE")
 
-    subprocess.call(["rsync", "-az", "/GenomeDataset/Processing/",
+    subprocess.call(["rsync", "-az", "GenomeDataset/Processing/",
                      "server_master@192.168.6.4:~/Documents/master-GSAFv2/gsaf-2.0/GenomeDataset/Processing/"])
 
     return len(sequence_record)
