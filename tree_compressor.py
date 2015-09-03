@@ -31,5 +31,3 @@ input_str = str(input('PATTERN? \t'))
 input_chr = int(input('CHR? \t\t'))
 
 print(str(result[input_str][input_chr]))
-
-calculation = np.array(``
