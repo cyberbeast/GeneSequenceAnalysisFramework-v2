@@ -38,7 +38,8 @@ def process(filename):
         atree.process_subsequence(subsequence_chunks)
 
     atree.dump_to_file(filename + "_TREE")
-    atree.pickle_into_file("/GenomeDataset/Chromosomes/Processing/" + filename + "_pTREE")
+
+    atree.pickle_into_file("/GenomeDataset/Chromosomes/Processing/" + os.path.basename(filename) + "_pTREE")
 
     subprocess.call(["rsync", "-az", "/GenomeDataset/Chromosomes/Processing/",
                      "server_master@192.168.6.4:~/Documents/master-GSAFv2/gsaf-2.0/GenomeDataset/Chromosomes/Processing/"])
