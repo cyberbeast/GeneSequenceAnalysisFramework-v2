@@ -39,6 +39,8 @@ def process(filename):
 
     atree.dump_to_file(filename + "_TREE")
 
+    print(os.getcwd())
+
     atree.pickle_into_file("/GenomeDataset/Chromosomes/Processing/" + os.path.basename(filename) + "_pTREE")
 
     subprocess.call(["rsync", "-az", "/GenomeDataset/Chromosomes/Processing/",
