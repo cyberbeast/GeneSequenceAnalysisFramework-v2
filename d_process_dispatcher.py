@@ -11,6 +11,7 @@ def manage_process_task():
 	async_result = []
 	for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
 		async_result.append(app.send_task("d_process_task.process", args=(name,)))
+		# async_result.append(app.send_task("d_process_task.process", args=(name,)))
 
 	total = 0
 
