@@ -20,10 +20,7 @@ def manage_process_task():
 
 	print(total)
 
-	worker_list = ["192.168.6.4", "192.168.6.64", "192.168.6.51", "192.168.6.42", "192.168.6.57", "192.168.6.86"]
-
-	for x in worker_list:
-		subprocess.call(["rsync", "-azP", "server_master@192.168.6.4:~/Documents/master-GSAFv2/gsaf-2.0/GenomeDataset/Chromosomes/Processing/", ("cyberbeast@" + x + ":/GenomeDataset/Chromosomes/Processing/")])
+	subprocess.call(["ssh", "server_master@192.168.6.4", "d_sync.sh"])
 
 
 def manage_unique_pattern_generation_task(depth):
