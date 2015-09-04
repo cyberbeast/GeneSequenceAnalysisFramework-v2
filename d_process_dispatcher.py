@@ -20,7 +20,7 @@ def manage_process_task():
 
 	print(total)
 
-	subprocess.call(["ssh", "server_master@192.168.6.4", "d_sync.sh"])
+	subprocess.call(["ssh", "server_master@192.168.6.4", "~/d_sync.sh"])
 
 
 def manage_unique_pattern_generation_task(depth):
