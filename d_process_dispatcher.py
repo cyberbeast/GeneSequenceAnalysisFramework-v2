@@ -38,16 +38,6 @@ def manage_unique_pattern_generation_task(depth):
 
 	print(unique_patterns)
 
-
-#
-# def manage_count_task():
-
-
-# def manage_countmap_task():
-# 	manage_count_task()
-# 	manage_map_task()
-
-
 if __name__ == '__main__':
 	app = Celery('d_process_task', broker='redis://192.168.6.4:6379/0', backend='redis://192.168.6.4:6379/0')
 

@@ -34,7 +34,7 @@ def process(filename):
     atree = ATree()
     print(str(len(sequence_record)) + "-->" + str(atree))
 
-    for subsequence_chunks in break_sequence(sequence_record, 4):
+    for subsequence_chunks in break_sequence(sequence_record, 8):
         atree.process_subsequence(subsequence_chunks)
 
     atree.dump_to_file(filename + "_TREE")
