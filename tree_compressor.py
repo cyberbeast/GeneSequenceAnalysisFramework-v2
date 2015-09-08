@@ -9,7 +9,7 @@ filelist = []
 for name in glob.glob('GenomeDataset/Processing/*pTREE'):
 	filelist.append(name)
 
-pattern_list = ["".join(x) for i in range(1, 5) for x in product(* ['ATGC']* i)]
+pattern_list = ["".join(x) for i in range(1, 9) for x in product(* ['ATGC']* i)]
 pattern_list.sort()
 count_matrix = {}
 result = {pattern: [] for pattern in pattern_list}
@@ -31,3 +31,4 @@ input_str = str(input('PATTERN? \t'))
 input_chr = int(input('CHR? \t\t'))
 
 print(str(result[input_str][input_chr]))
+
