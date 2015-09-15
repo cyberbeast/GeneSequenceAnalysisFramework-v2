@@ -1,3 +1,4 @@
+__author__ = 'cyberbeast'
 __author__ = 'Sandesh'
 
 from CustomClasses.Chromosome import *
