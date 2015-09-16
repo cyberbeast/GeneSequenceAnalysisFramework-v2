@@ -23,7 +23,7 @@ class Chromosome:
 
         # statistical_inferences attribute used for storing mean, mode, median, min, max, average
         self.statistical_inferences_exist = False
-        self.statistical_inferences = {"mean": 0, "mode": 0, 'median': 0, 'min': 0,  'max': 0, 'range': 0}
+        self.statistical_inferences = {"mean": 0, "mode": 0, 'median': 0, 'min': 0, 'max': 0, 'range': 0}
 
         self.has_been_analyzed = False
 
@@ -45,7 +45,7 @@ class Chromosome:
             self.calculate_eigen_values() if not self.eigen_exists else print('EV(s) exist!')
 
             # Dump pickled data
-            self.store_to_file(chromosome_file + "_pChromosome")
+            self.store_to_file(chromosome_file + "_pChromosome", filealso=False)
 
             # Update has_been_analyzed attribute
             self.has_been_analyzed = True
@@ -55,13 +55,18 @@ class Chromosome:
         for pattern in self._pattern_list:
             if len(pattern) > 1:
                 if len(pattern) == 2:
-                    self.gmap[self._pattern_list_half.index(pattern[:int(len(pattern) / 2)])][self._pattern_list_half.index(pattern[int(len(pattern) / 2):])] = self.new_tree.count(pattern)
+                    self.gmap[self._pattern_list_half.index(pattern[:int(len(pattern) / 2)])][
+                        self._pattern_list_half.index(pattern[int(len(pattern) / 2):])] = self.new_tree.count(pattern)
                     # print(pattern[:int(len(pattern) / 2)] + "-->" + pattern[int(len(pattern) / 2):] + ":::" + str(self.gmap[self._pattern_list_half.index(pattern[:int(len(pattern) / 2)])][self._pattern_list_half.index(pattern[int(len(pattern) / 2):])]))
                 else:
-                    if 1 + len(pattern)/2 <= 4:
-                        self.gmap[self._pattern_list_half.index(pattern[:int(len(pattern) / 2)])][self._pattern_list_half.index(pattern[int(len(pattern) / 2):])] = self.new_tree.count(pattern)
+                    if 1 + len(pattern) / 2 <= 4:
+                        self.gmap[self._pattern_list_half.index(pattern[:int(len(pattern) / 2)])][
+                            self._pattern_list_half.index(pattern[int(len(pattern) / 2):])] = self.new_tree.count(
+                            pattern)
                         # print(pattern[:int(len(pattern) / 2)] + "-->" + pattern[int(len(pattern) / 2):] + ":::" + str(self.gmap[self._pattern_list_half.index(pattern[:int(len(pattern) / 2)])][self._pattern_list_half.index(pattern[int(len(pattern) / 2):])]))
-                        self.gmap[self._pattern_list_half.index(pattern[:1 + int(len(pattern) / 2)])][self._pattern_list_half.index(pattern[1 + int(len(pattern) / 2):])] = self.new_tree.count(pattern)
+                        self.gmap[self._pattern_list_half.index(pattern[:1 + int(len(pattern) / 2)])][
+                            self._pattern_list_half.index(pattern[1 + int(len(pattern) / 2):])] = self.new_tree.count(
+                            pattern)
                         # print(pattern[:1 + int(len(pattern) / 2)] + "-->" + pattern[1 + int(len(pattern) / 2):] + ":::" + str(self.gmap[self._pattern_list_half.index(pattern[:1 + int(len(pattern) / 2)])][self._pattern_list_half.index(pattern[1 + int(len(pattern) / 2):])]))
 
         self.gmap_exists = True
@@ -71,14 +76,17 @@ class Chromosome:
         with open('op', 'w') as outfile:
             outfile.write(str(self.gmap))
 
-        # This is to check if the mapping is indeed correct. If correct, both the print statements will print the same numerical value.
-        # print(self.gmap[self._pattern_list_half.index('A')][self._pattern_list_half.index('AA')])
-        # print(self.gmap[self._pattern_list_half.index('AA')][self._pattern_list_half.index('A')])
+            # This is to check if the mapping is indeed correct. If correct, both the print statements will print the same numerical value.
+            # print(self.gmap[self._pattern_list_half.index('A')][self._pattern_list_half.index('AA')])
+            # print(self.gmap[self._pattern_list_half.index('AA')][self._pattern_list_half.index('A')])
 
-    def store_to_file(self, filename):
+    def store_to_file(self, filename, filealso=False):
         with open(filename, 'wb') as picklefile:
             pickle.dump(self, picklefile)
         print("Stored to " + filename + " successfully!")
+
+        if filealso:
+            self.gmap.tofile(filename + "MAP_MATRIX_")
 
     def calculate_eigen_values(self):
         # Eigen Value Calculation and Output Code
@@ -93,4 +101,7 @@ class Chromosome:
         self.statistical_inferences['range'] = np.ptp(self.gmap)
         self.statistical_inferences_exist = True
         # print(self.statistical_inferences)
+
+        # with open("map" + )
+
         return w
