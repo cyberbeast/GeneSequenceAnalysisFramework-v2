@@ -98,5 +98,27 @@ df_vis2.to_csv('Visualizer/squareroot-of-sum-of-squares-of-real-and-imaginary.cs
 # Uncomment next line for 3D plot of preliminary results
 # plot1()
 
+# ********************************************************************************************************************
+# ********************************************************************************************************************
+# ********************************************************************************************************************
+# ********************************************************************************************************************
+# ********************************************************************************************************************
+# ********************************************************************************************************************
+# Alpha Build Code from here onwards (18/09/2015)
 
+data_collection_vis2 = pd.read_csv(open("Visualizer/squareroot-of-sum-of-squares-of-real-and-imaginary.csv"),)
+y = data_collection_vis2.as_matrix
+x = np.array([val1 for val1 in range(0, 340)])
+# y_temp = np.array(np.sqrt(np.square(y_val_real) + np.square(y_val_imag)))
+# y = y_temp[0]
+# y = y_temp
+# print(len(y))
+# x = temp_x.flatten()
+# print(x.shape)
+p = np.poly2d(np.polyfit(x, y, 50))
+p30 = np.poly2d(np.polyfit(x, y, 100))
+xp = np.linspace(0, 340)
+print(p)
+_ = plt.plot(x, y, '.', xp, p(xp), '-', xp, p30(xp), '--')
+plt.show()
 
