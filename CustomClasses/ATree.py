@@ -28,12 +28,12 @@ class ATree:
         pass
 
     def compute_values(self):
-        print("Computing Values!")
         if not self.values_computed:
             if self.children != {}:
                 for key in self.children.keys():
                     self.value += self.children[key].compute_values()
             self.values_computed = True
+            print("Squashing sub-tree: " + self.value)
             return self.value
 
     def count(self, subsequence):
@@ -67,7 +67,7 @@ class ATree:
     def load_tree(filename):
         with open(filename, 'r') as infile:
             tree_dictionary = json.load(infile)
-
+        print("Tree Loaded!")
         return tree_dictionary
 
     def to_dictionary(self):
@@ -99,7 +99,7 @@ class ATree:
             if not self.values_computed:
                 self.compute_values()
             json.dump(self.to_dictionary(), outfile)
-        print("Dumped to " + filename)
+        print("Dumping intermediate data to " + filename)
 
     def pickle_into_file(self, filename):
         with open(filename, 'wb') as picklefile:

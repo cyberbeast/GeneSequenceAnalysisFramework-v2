@@ -10,7 +10,9 @@ import subprocess
 
 def manage_process_task():
     async_result = []
+    print("Acquiring Chromosome Data")
     for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
+	print("Distributing Chromosomes across Cluster")
         async_result.append(app.send_task("d_process_task.process", args=(name,)))
     # async_result.append(app.send_task("d_process_task.process", args=(name,)))
 

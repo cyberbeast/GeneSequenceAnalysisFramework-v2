@@ -24,12 +24,13 @@ app.conf.CELERYD_LOG_FORMAT = '[%(processName)s] %(message)s'
 
 @app.task
 def process(filename):
-    print(filename)
+    print("Processing " + filename)
     sequence_record_list = []
 
     # print(os.getcwd())
     for record in SeqIO.parse(filename, "fasta"):
         sequence_record_list.append(record.seq)
+	print("Sequences Extracted!")
 
     sequence_record = ''.join(str(e) for e in sequence_record_list)
     atree = ATree()
@@ -40,13 +41,13 @@ def process(filename):
 
     atree.dump_to_file(filename + "_TREE")
 
-    print(os.getcwd())
+    print("Ensuring correct File System Navigation: " + os.getcwd())
 
     atree.pickle_into_file("GenomeDataset/Processing/" + os.path.basename(filename) + "_pTREE")
 
     subprocess.call(["rsync", "-az", "GenomeDataset/Processing/",
                      "server_master@192.168.6.4:~/Documents/master-GSAFv2/gsaf-2.0/GenomeDataset/Processing/"])
-
+	
     return len(sequence_record)
 
 
