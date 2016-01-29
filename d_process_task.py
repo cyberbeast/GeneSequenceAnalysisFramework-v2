@@ -19,6 +19,7 @@ def break_sequence(sequence, depth):
 
 
 app = Celery('tasks', broker='redis://192.168.6.4:6379/0', backend='redis://192.168.6.4:6379/0')
+app.conf.CELERYD_LOG_FORMAT = '[%(processName)s] %(message)s'
 
 
 @app.task
