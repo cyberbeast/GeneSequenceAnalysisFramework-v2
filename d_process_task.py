@@ -30,7 +30,7 @@ def process(filename):
     # print(os.getcwd())
     for record in SeqIO.parse(filename, "fasta"):
         sequence_record_list.append(record.seq)
-	print("Sequences Extracted!")
+    print("Sequences Extracted!")
 
     sequence_record = ''.join(str(e) for e in sequence_record_list)
     atree = ATree()
