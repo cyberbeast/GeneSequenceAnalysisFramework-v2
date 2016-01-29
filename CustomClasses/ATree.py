@@ -13,7 +13,7 @@ class ATree:
         self.children = {}
 
     def process_subsequence(self, subsequence, level=1):
-        print ("Processing Subsequence: " + subsequence)
+        # print ("Processing: " + subsequence)
         if len(subsequence) == 1:
             if subsequence not in self.children.keys():
                 self.children[subsequence] = ATree()

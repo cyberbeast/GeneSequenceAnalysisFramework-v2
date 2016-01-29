@@ -37,8 +37,10 @@ class Chromosome:
     def load_chromosome_tree(self, filename):
         with open(filename, 'rb') as in_fh:
             self.new_tree = pickle.load(in_fh)
+	print(filename + "Chromosome Tree Loaded!")
 
     def analyze(self, chromosome_file):
+	print ("Analyzing " + chromosome_file)
         if not self.has_been_analyzed:
             self.load_chromosome_tree(chromosome_file)
             self.map(chromosome_file) if not self.gmap_exists else print('Chromosome is mapped!')
@@ -51,6 +53,7 @@ class Chromosome:
             self.has_been_analyzed = True
 
     def map(self, chromosome_file):
+	print("Performing Mapping Logic on: " + chromosome_file)
         # Mapping Logic Code
         for pattern in self._pattern_list:
             if len(pattern) > 1:
