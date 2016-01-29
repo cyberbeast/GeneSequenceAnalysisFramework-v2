@@ -12,7 +12,7 @@ def manage_process_task():
     async_result = []
     print("Acquiring Chromosome Data")
     for name in glob.glob('GenomeDataset/Chromosomes/*.fa'):
-	print("Distributing Chromosomes across Cluster")
+        print("Throwing" + name + "at Cluster")
         async_result.append(app.send_task("d_process_task.process", args=(name,)))
     # async_result.append(app.send_task("d_process_task.process", args=(name,)))
 
@@ -58,7 +58,7 @@ def analysis():
 
         for pattern in pattern_list:
             result[pattern].append(new_tree.count(pattern))
-            print("-->" + pattern + ": " + new_tree.count(pattern))
+            print("-->" + pattern + ": " + str(new_tree.count(pattern)))
 
 
 if __name__ == '__main__':

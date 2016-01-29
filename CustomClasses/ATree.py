@@ -33,7 +33,7 @@ class ATree:
                 for key in self.children.keys():
                     self.value += self.children[key].compute_values()
             self.values_computed = True
-            print("Squashing sub-tree: " + self.value)
+            print("Squashing sub-tree: " + str(self.value))
             return self.value
 
     def count(self, subsequence):
