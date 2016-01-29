@@ -5,6 +5,7 @@ from bokeh.charts import Line, show, output_file
 from bokeh.models.widgets import Panel, Tabs
 import numpy.polynomial.polynomial as poly
 import numpy as np
+from operator import sub
 
 print("Initializing Settings")
 # Common settings for all visualizations
@@ -54,9 +55,21 @@ xp = [i for i in range(0, 340)]
 
 ffit50 = poly.polyval(xp, coefs50)
 ffit100 = poly.polyval(xp, coefs100)
+
+list_obs = [data_collection_vis2[clm_list[countt]].tolist() for countt in range(1, 23)]
+list_exp = [list(ffit100[stuff]) for stuff in range(0, 22)]
+print(len(list_obs))
+print(len(list_exp))
+print(len(list_obs) == len(list_exp))
+
+error_list = []
+for something in range(0, 22):
+    list_diff = [a - b for a, b in zip(list_obs[something], list_exp[something])]
+    error_list.append(np.mean(list_diff))
+print(np.mean(error_list))
 data_collection_vis3 = pd.DataFrame(dict(
     index_x=xp,
-    C1=ffit100[0].transpose(),
+    C1=ffit100[0].transpose()
     C2=ffit100[1].transpose(),
     C3=ffit100[2].transpose(),
     C4=ffit100[3].transpose(),
@@ -83,5 +96,5 @@ p_v3 = Line(data_collection_vis3, index='index_x', title="Polynomial Regression 
 tab3 = Panel(child=p_v3, title="Visualization 3 - Polynomial Regression")
 
 tabs = Tabs(tabs=[tab1, tab2, tab3])  # Set Tabs
-show(tabs)  # Show Visualization Output
+# show(tabs)  # Show Visualization Output
 

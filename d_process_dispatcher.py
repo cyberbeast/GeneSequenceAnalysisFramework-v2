@@ -56,6 +56,7 @@ def analysis():
 
         for pattern in pattern_list:
             result[pattern].append(new_tree.count(pattern))
+            print("-->" + pattern + ": " + new_tree.count(pattern))
 
 
 if __name__ == '__main__':

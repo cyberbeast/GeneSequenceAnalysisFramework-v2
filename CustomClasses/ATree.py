@@ -13,6 +13,7 @@ class ATree:
         self.children = {}
 
     def process_subsequence(self, subsequence, level=1):
+        print ("Processing Subsequence: " + subsequence)
         if len(subsequence) == 1:
             if subsequence not in self.children.keys():
                 self.children[subsequence] = ATree()
@@ -27,6 +28,7 @@ class ATree:
         pass
 
     def compute_values(self):
+        print("Computing Values!")
         if not self.values_computed:
             if self.children != {}:
                 for key in self.children.keys():
@@ -35,22 +37,28 @@ class ATree:
             return self.value
 
     def count(self, subsequence):
+        print("Count(" + subsequence + ") = ")
         if not self.values_computed:
             self.compute_values()
         if len(subsequence) == 1:
             if subsequence in self.children.keys():
+                print(self.children[subsequence].value)
                 return self.children[subsequence].value
             else:
+                print("0")
                 return 0
         else:
             head, tail = subsequence[0], subsequence[1:]
             if head not in self.children.keys():
+                print("0")
                 return 0
             else:
+                print(self.children[head].count(tail))
                 return self.children[head].count(tail)
 
     def node_count(self):
         if self.children == {}:
+            print("Node Count is 1")
             return 1
         else:
             return 1 + sum([self.children[key].nodeCount() for key in self.children.keys()])
@@ -91,9 +99,11 @@ class ATree:
             if not self.values_computed:
                 self.compute_values()
             json.dump(self.to_dictionary(), outfile)
+        print("Dumped to " + filename)
 
     def pickle_into_file(self, filename):
         with open(filename, 'wb') as picklefile:
             if not self.values_computed:
                 self.compute_values()
             pickle.dump(self, picklefile)
+        print("Pickling Complete! Pickled into: " + filename)
